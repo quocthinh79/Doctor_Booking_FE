@@ -1,20 +1,28 @@
-import React from "react";
+import { ThemeProvider } from "@emotion/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ConfigProvider } from "antd";
+import theme from "antd/es/theme";
+import { useMemo } from "react";
+import { customToken } from "./core/theme";
+import Router from "./router";
+
+const { useToken } = theme;
+const queryClient = new QueryClient();
 
 function App() {
+  const { token: uiFrameworkToken } = useToken();
+  const token = useMemo(
+    () => ({ ...uiFrameworkToken, ...customToken }),
+    [uiFrameworkToken]
+  );
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>This is doctor booking project</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <ConfigProvider>
+        <ThemeProvider theme={token}>
+          <Router />
+        </ThemeProvider>
+      </ConfigProvider>
+    </QueryClientProvider>
   );
 }
 
