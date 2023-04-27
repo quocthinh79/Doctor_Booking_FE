@@ -1,5 +1,7 @@
+import { DoctorItemLayout } from "@compositions";
+
 function HomePage() {
-  return <>This is home page</>;
+  return <DoctorItemLayout />;
 }
 
 export default HomePage;
