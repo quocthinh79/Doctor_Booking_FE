@@ -1,10 +1,10 @@
 import { CheckableTag, Flex } from "@components";
-import { EWrapFlex } from "@core";
+import { EWrapFlex, IFilterItemRes } from "@core";
 import { SelectedTagsProps } from "@hooks";
 
 export interface SiderItemProps {
   label: string;
-  children?: string[];
+  children?: IFilterItemRes[];
   selectedTags: SelectedTagsProps;
   handleChange: any;
 }
@@ -17,13 +17,13 @@ export function SiderItem({
 }: SiderItemProps) {
   return (
     <Flex wrap={EWrapFlex.Wrap} gap={10}>
-      {children?.map((tag, index) => (
+      {children?.map(({ id, name }, index) => (
         <CheckableTag
-          key={tag}
-          checked={selectedTags?.[label]?.includes(tag)}
-          onChange={(checked) => handleChange(label, tag, checked)}
+          key={name}
+          checked={selectedTags?.[label]?.includes(name)}
+          onChange={(checked) => handleChange(label, name, checked)}
         >
-          {tag}
+          {name}
         </CheckableTag>
       ))}
     </Flex>

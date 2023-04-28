@@ -1,10 +1,12 @@
+import { apiGetDegreeFilterItem, apiGetSpecializeFilterItem } from "@api";
 import { Sider } from "@components";
+import { EOrderTags, IFilterItemRes } from "@core";
 import styled from "@emotion/styled";
 import { useSelectedTag } from "@hooks";
-import SiderItem from "./sider-item";
-import { EOrderTags } from "@core";
+import { useQuery } from "@tanstack/react-query";
 import { Collapse } from "antd";
 import CollapsePanel from "antd/es/collapse/CollapsePanel";
+import SiderItem from "./sider-item";
 
 const StyledContainer = styled("div")`
   .ant-layout-sider {
@@ -15,6 +17,16 @@ const StyledContainer = styled("div")`
 export function MainSider() {
   const { handleChange, selectedTags } = useSelectedTag();
 
+  const { data: dataSpecialize } = useQuery<IFilterItemRes[]>({
+    queryKey: ["SpecializeFilterItem"],
+    queryFn: () => apiGetSpecializeFilterItem(),
+  });
+
+  const { data: dataDegree } = useQuery<IFilterItemRes[]>({
+    queryKey: ["DegreeFilterItem"],
+    queryFn: () => apiGetDegreeFilterItem(),
+  });
+
   return (
     <StyledContainer>
       <Sider width={300}>
@@ -24,7 +36,10 @@ export function MainSider() {
               selectedTags={selectedTags}
               handleChange={handleChange}
               label={EOrderTags.Gender}
-              children={["Nam", "Nữ"]}
+              children={[
+                { id: 1, name: "Nam" },
+                { id: 2, name: "Nữ" },
+              ]}
             />
           </CollapsePanel>
           <CollapsePanel header="Chuyên khoa" key="2">
@@ -32,7 +47,7 @@ export function MainSider() {
               selectedTags={selectedTags}
               handleChange={handleChange}
               label={EOrderTags.Specialize}
-              children={["Tâm thần", "Nữ"]}
+              children={dataSpecialize || []}
             />
           </CollapsePanel>
           <CollapsePanel header="Học vị" key="3">
@@ -40,7 +55,7 @@ export function MainSider() {
               selectedTags={selectedTags}
               handleChange={handleChange}
               label={EOrderTags.Degree}
-              children={["TS.BS", "GS.TS.BS"]}
+              children={dataDegree}
             />
           </CollapsePanel>
         </Collapse>

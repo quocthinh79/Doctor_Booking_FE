@@ -24,3 +24,4 @@ export * from "./ETextAlign";
 export * from "./ETheme";
 export * from "./ETriggerSubMenuAction";
 export * from "./EWrapFlex";
+export * from "./EOrderTags";
