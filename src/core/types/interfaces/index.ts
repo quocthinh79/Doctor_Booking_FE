@@ -7,3 +7,5 @@ export * from "./ITypeDataTable";
 export * from "./IRegister";
 export * from "./IForgotPassword";
 export * from "./INewPassword";
+export * from "./request";
+export * from "./response";
