@@ -5,7 +5,8 @@ import { default as InputSearchCustom } from "./input-search";
 import { noop } from "@constant";
 
 const StyledInputSearch = styled(InputSearchCustom)`
-  width: auto;
+  width: 400px;
+  margin-left:150px;
 `;
 
 export interface InputSearchProps extends InputTextProps {
