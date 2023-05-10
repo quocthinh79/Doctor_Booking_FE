@@ -3,16 +3,27 @@ import { EBreakpoint, templateStringToClassName } from "@core";
 import { ReactNode, memo } from "react";
 import MainHeader from "../main-header";
 import MainSider from "../main-sider";
-import { Carousel, Divider, Layout } from "antd";
+import { Carousel, Col, Divider, Layout, Row } from "antd";
 import { ContainerFixed } from "@components";
 import { Content, Footer } from "antd/es/layout/layout";
+import{
+  Image,
+  Title,
+  Description,
+  DescriptionItem,
+  Card, 
+  Space,
+  Text
+} from "@components";
 
 export interface MainLayoutProps {
   children?: ReactNode;
   sider?: boolean;
   carousel?: boolean;
 }
-
+    const Banner01 = require("../../../images/banner01.jpg");
+    const Banner02 = require("../../../images/banner02.jpg");
+    const Banner03 = require("../../../images/banner03.jpg");
 export function MainLayout({ children, sider, carousel }: MainLayoutProps) {
   return (
     <Layout className={templateStringToClassName()`min-height: 100vh;`}>
@@ -20,11 +31,9 @@ export function MainLayout({ children, sider, carousel }: MainLayoutProps) {
       <ContainerFixed breakpoint={EBreakpoint.XL}>
         {carousel && (
           <Carousel lazyLoad="progressive" autoplay draggable>
-            <h1>This is carousel</h1>
-            <h1>This is carousel</h1>
-            <h1>This is carousel</h1>
-            <h1>This is carousel</h1>
-            <h1>This is carousel</h1>
+            <Image height= "auto" preview={false} src={Banner01} />
+            <Image height= "auto" preview={false} src={Banner02} />
+            <Image height= "auto" preview={false} src={Banner03} /> 
           </Carousel>
         )}
         <Layout
@@ -37,9 +46,11 @@ export function MainLayout({ children, sider, carousel }: MainLayoutProps) {
         </Layout>
       </ContainerFixed>
       <Footer style={{ marginTop: "auto" }}>
-        <Divider />
+      <Divider />
         <ContainerFixed breakpoint={EBreakpoint.XL} position="center">
-          This is footer
+          <Text>
+            DoctorBooking ©2023 Created by Group05
+          </Text>
         </ContainerFixed>
       </Footer>
     </Layout>
