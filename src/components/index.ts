@@ -32,6 +32,7 @@ export { default as PopConfirm } from "./popconfirm";
 export * from "./radio";
 export * from "./radio-group";
 export * from "./result";
+export * from "./remember-me";
 export * from "./select";
 export * from "./sider";
 export * from "./slider-range";

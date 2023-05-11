@@ -4,6 +4,7 @@ export const noarr = [];
 export const nostr = "";
 
 export const FORMAT_DATE_DEFAULT = "DD/MM/YYYY";
+export const EMPTY_INPUT_ERROR = "Trường bắt buộc"
 export const SPACE_BETWEEN_ITEMS = 24;
 
 export const REGEX_ALL_SYMBOL = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g;
