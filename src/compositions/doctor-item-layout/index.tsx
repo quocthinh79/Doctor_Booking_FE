@@ -42,11 +42,11 @@ export function DoctorItemLayout() {
 
   return (
     <Row gutter={[SPACE_BETWEEN_ITEMS, SPACE_BETWEEN_ITEMS]}>
-      {data?.map(({ fullName, phone }, index) => (
+      {data?.map(({ fullName, phone, id }, index) => (
         <Col key={`${fullName}${index}`} span={8}>
           <DoctorCardItem
             key={index}
-            id={index}
+            id={id}
             phoneNumber={phone}
             doctorName={fullName}
             linkAvatar={
