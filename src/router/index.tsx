@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { routerPathFull } from "../core";
+import BookingPage from "../pages/booking";
 import { routerAdminConfig } from "./admin/routerAdminConfig";
 import routerAuthConfig from "./auth/routerAuthConfig";
 import RouterHomeLayout from "./routerHomeLayout";
@@ -13,6 +14,7 @@ const Cart = lazy(() => import("../pages/cart"));
 const DetailPage = lazy(() => import("../pages/detail"));
 const PaymentPage = lazy(() => import("../pages/payment"));
 const SearchPage = lazy(() => import("../pages/search"));
+const Booking = lazy(() => import("../pages/booking"));
 
 const router = [
   {
@@ -76,6 +78,14 @@ const router = [
         element: (
           <Suspense fallback={<>Loading</>}>
             <SearchPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: routerPathFull.booking.root,
+        element: (
+          <Suspense fallback={<>Loading</>}>
+            <BookingPage />
           </Suspense>
         ),
       },
