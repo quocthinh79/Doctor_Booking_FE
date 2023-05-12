@@ -34,9 +34,13 @@ export const routerPath = {
   checkout: {
     root: "checkout",
   },
-  booking:{
-    root: "booking"
-  }
+  booking: {
+    root: "booking",
+  },
+  appointment: {
+    root: "appointment",
+    detail: ":idAppointment",
+  },
 };
 
 export type TRouterPath = typeof routerPath;

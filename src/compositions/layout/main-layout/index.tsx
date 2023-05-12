@@ -1,5 +1,5 @@
 import { SPACE_BETWEEN_ITEMS } from "@constant";
-import { EBreakpoint, templateStringToClassName } from "@core";
+import { EBreakpoint,templateStringToClassName,ETextAlign } from "@core";
 import { ReactNode, memo } from "react";
 import MainHeader from "../main-header";
 import MainSider from "../main-sider";
@@ -48,7 +48,7 @@ export function MainLayout({ children, sider, carousel }: MainLayoutProps) {
       <Footer style={{ marginTop: "auto" }}>
       <Divider />
         <ContainerFixed breakpoint={EBreakpoint.XL} position="center">
-          <Text>
+          <Text textAlign={ETextAlign.Center}>
             DoctorBooking ©2023 Created by Group05
           </Text>
         </ContainerFixed>
