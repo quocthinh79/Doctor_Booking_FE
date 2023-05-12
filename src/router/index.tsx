@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { routerPathFull } from "../core";
-import BookingPage from "../pages/booking";
 import { routerAdminConfig } from "./admin/routerAdminConfig";
 import routerAuthConfig from "./auth/routerAuthConfig";
 import RouterHomeLayout from "./routerHomeLayout";
@@ -14,7 +13,9 @@ const Cart = lazy(() => import("../pages/cart"));
 const DetailPage = lazy(() => import("../pages/detail"));
 const PaymentPage = lazy(() => import("../pages/payment"));
 const SearchPage = lazy(() => import("../pages/search"));
-const Booking = lazy(() => import("../pages/booking"));
+const BookingPage = lazy(() => import("../pages/booking"));
+const AppointmentPage = lazy(() => import("../pages/appointment"));
+const AppointmentDetail = lazy(() => import("../pages/appointment-detail"));
 
 const router = [
   {
@@ -86,6 +87,22 @@ const router = [
         element: (
           <Suspense fallback={<>Loading</>}>
             <BookingPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: routerPathFull.appointment.root,
+        element: (
+          <Suspense fallback={<>Loading</>}>
+            <AppointmentPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: routerPathFull.appointment.detail,
+        element: (
+          <Suspense fallback={<>Loading</>}>
+            <AppointmentDetail />
           </Suspense>
         ),
       },
