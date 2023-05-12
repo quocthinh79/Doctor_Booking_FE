@@ -1,19 +1,21 @@
-import {
-  InputText,
-  RadioGroup,
-  Radio,
-  Space,
-  SizeProps,
-}
-  from "@components";
+import { InputText, RadioGroup, Radio, Space, SizeProps } from "@components";
 const config = {
-  rules: [{ type: 'object' as const, required: true, message: 'Please select time!' }],
+  rules: [
+    { type: "object" as const, required: true, message: "Please select time!" },
+  ],
 };
 import { EMPTY_INPUT_ERROR, FORMAT_DATE_DEFAULT } from "@constant";
 import { EDirectionType } from "@core";
+import { useDayBooking } from "@store";
 import { DatePicker, Form, TimePicker } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import dayjs from "dayjs";
 export function InformationDoctorBooking() {
+  const dayBooking = useDayBooking((state: any) => state?.dayBooking);
+  console.log(
+    "🚀 ~ file: index.tsx:10 ~ FormContent ~ dayBooking:",
+    dayBooking
+  );
   return (
     <Space
       size={SizeProps.Middle}
@@ -70,15 +72,17 @@ export function InformationDoctorBooking() {
         label="Email"
       >
         <InputText placeholder="Nhập email của bạn" />
-      </Form.Item >
+      </Form.Item>
       <Form.Item
-        rules={[{
-          required: true,
-          message: EMPTY_INPUT_ERROR,
-        },
+        rules={[
+          {
+            required: true,
+            message: EMPTY_INPUT_ERROR,
+          },
         ]}
         name="time-picker"
-        label="Giờ">
+        label="Giờ"
+      >
         <TimePicker format="HH:mm" />
       </Form.Item>
       <Form.Item
@@ -90,13 +94,11 @@ export function InformationDoctorBooking() {
         ]}
         name="day"
         label="Ngày đặt"
+        initialValue={dayjs(dayBooking)}
       >
         <DatePicker format={FORMAT_DATE_DEFAULT} />
       </Form.Item>
-      <Form.Item
-        name="textArea"
-        label="Mô tả triệu chứng"
-      >
+      <Form.Item name="textArea" label="Mô tả triệu chứng">
         <TextArea name="textArea">
           <TextArea rows={4} />
         </TextArea>
@@ -104,4 +106,4 @@ export function InformationDoctorBooking() {
     </Space>
   );
 }
-      export default InformationDoctorBooking;
+export default InformationDoctorBooking;
