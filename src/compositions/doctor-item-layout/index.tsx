@@ -25,7 +25,7 @@ export function DoctorItemLayout() {
   // )
   // );
 
-  const { data, refetch } = useQuery<IDoctorListRes[]>({
+  const { data, refetch, dataUpdatedAt } = useQuery<IDoctorListRes[]>({
     refetchOnWindowFocus: false,
     queryKey: ["doctorList"],
     queryFn: () =>

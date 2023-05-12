@@ -18,11 +18,13 @@ export function MainSider() {
   const { handleChange, selectedTags } = useSelectedTag();
 
   const { data: dataSpecialize } = useQuery<IFilterItemRes[]>({
+    refetchOnWindowFocus: false,
     queryKey: ["SpecializeFilterItem"],
     queryFn: () => apiGetSpecializeFilterItem(),
   });
 
   const { data: dataDegree } = useQuery<IFilterItemRes[]>({
+    refetchOnWindowFocus: false,
     queryKey: ["DegreeFilterItem"],
     queryFn: () => apiGetDegreeFilterItem(),
   });
