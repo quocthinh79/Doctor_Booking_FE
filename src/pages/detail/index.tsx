@@ -1,4 +1,4 @@
-import { Calendar } from "antd";
+import { Calendar, Form } from "antd";
 import {
   Button,
   Card,
@@ -17,10 +17,14 @@ import {
   EDirectionFlex,
   IDoctorDetailRes,
   apiDoctorDetail,
+  routerPathFull,
 } from "@core";
 import { LeftRightLayout } from "@compositions";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "antd/es/form/Form";
+import dayjs, { Dayjs } from "dayjs";
+import { useDayBooking } from "@store";
 export function DetailPage() {
   let { idDoctor } = useParams();
   const { data } = useQuery<IDoctorDetailRes>({
@@ -34,12 +38,37 @@ export function DetailPage() {
 
   const { degree, email, phone, specialize, user_name } = data || {};
 
+  const navigate = useNavigate();
+
+  const [form] = useForm();
+  const setDayBooking = useDayBooking((state: any) => state?.setDayBooking);
+
+  const onFinish = (values: any) => {
+    console.log(
+      "🚀 ~ file: index.tsx:41 ~ onFinish ~ values:",
+      dayjs(values.calendar).toDate()
+    );
+    setDayBooking(dayjs(values.calendar).toDate());
+    navigate(routerPathFull.booking.root);
+  };
+
+  const onChangeCalendar = (value: Dayjs) => {
+    console.log(
+      "🚀 ~ file: index.tsx:49 ~ onChange ~ value:",
+      dayjs(value).toDate()
+    );
+  };
+
   return (
     <LeftRightLayout
       leftChildren={
         <Flex direction={EDirectionFlex.Column} gap={SPACE_BETWEEN_ITEMS}>
           <Card>
-            <Calendar />
+            <Form form={form} onFinish={onFinish}>
+              <Form.Item name={"calendar"} valuePropName="value">
+                <Calendar onChange={onChangeCalendar} />
+              </Form.Item>
+            </Form>
           </Card>
         </Flex>
       }
@@ -65,7 +94,11 @@ export function DetailPage() {
           <Divider />
           <Space widthFull>
             <Row gutter={[SPACE_BETWEEN_ITEMS, SPACE_BETWEEN_ITEMS]}>
-              <Button block type={EButtonTypes.Primary}>
+              <Button
+                block
+                type={EButtonTypes.Primary}
+                onClick={() => form.submit()}
+              >
                 Đặt lịch ngay
               </Button>
             </Row>
