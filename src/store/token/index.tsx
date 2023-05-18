@@ -8,6 +8,10 @@ const createTokenSlice = (set: any, get: any) => ({
 
   id: "",
   setId: (id: string) => set({ id }),
+  role: "",
+  setRole: (role: string) => set({ role }),
+  name: "",
+  setName: (name: string) => set({ name }),
 });
 
 export const useStorageToken = create(

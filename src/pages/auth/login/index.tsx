@@ -35,7 +35,7 @@ export interface LoginFormProps extends ILogin {
 export function LoginPage(_props: LoginProps) {
   const navigation = useNavigate();
   const [form] = useForm();
-  const { setToken, setId } = useStorageToken();
+  const { setToken, setId,setRole,setName } = useStorageToken();
   const { setRoles } = useStorageRoles();
   const [api, contextHolder] = notification.useNotification();
   const pathname = usePathname((state: any) => state.pathname);
@@ -46,6 +46,8 @@ export function LoginPage(_props: LoginProps) {
     onSuccess: (data) => {
       pathname === "" ? navigation("/") : navigation(pathname);
       setToken(data.token);
+      setRole(data.roles);
+      setName(data.userName)
       setRoles(data.roles);
       setId(data.id);
     },

@@ -15,13 +15,11 @@ import { SPACE_BETWEEN_ITEMS } from "@constant";
 import { cx } from "@emotion/css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { useStorageToken } from "@store";
 const logo = require("../../../images/logo.png");
 
 export function MainHeader() {
-<<<<<<< Updated upstream
-=======
   const { id, role, name } = useStorageToken();
->>>>>>> Stashed changes
   const [form] = useForm();
   const navigator = useNavigate();
   const { setId } = useStorageToken();
@@ -57,15 +55,6 @@ export function MainHeader() {
               </FormItem>
             </Form>
             <div style={{ fontSize: "28px", margin: "auto", marginRight: "5px" }} >
-<<<<<<< Updated upstream
-              <Link to={routerPathFull.appointment.root}>
-                <Button type={EButtonTypes.Text}>Danh sách lịch hẹn</Button>
-              </Link>
-              <Link to={routerPathFull.auth.login}>
-                <UserOutlined style={{ margin: "10px" }} />
-              </Link>
-              <LogoutOutlined style={{ margin: "10px" }} />
-=======
               {id !== "" ? (<Link to={routerPathFull.appointment.root}>
                 <Button type={EButtonTypes.Text}>Xin chào {name}, Danh sách lịch hẹn {role === "Doctor" ? "của bác sĩ" : "của bạn"}</Button>
               </Link>) : (<Link to={routerPathFull.auth.login}>
@@ -75,7 +64,6 @@ export function MainHeader() {
               {id != "" ? (
                 <Button type={EButtonTypes.Primary} onClick={() => {localStorage.clear(), setId(""), navigator("/") }}>Thoát</Button>
               ) : ""}
->>>>>>> Stashed changes
             </div>
           </Flex>
         </Flex>

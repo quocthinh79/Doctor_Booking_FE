@@ -3,15 +3,6 @@ import { useStorageToken } from "@store";
 import { useQuery } from "@tanstack/react-query";
 import { Avatar, List } from "antd";
 import { Link } from "react-router-dom";
-<<<<<<< Updated upstream
-import { IAppointmentRes, apiAppointmentPatient } from "@core";
-export function AppointmentPage() {
-  const { id } = useStorageToken();
-
-  const { data } = useQuery<IAppointmentRes[]>({
-    queryKey: ["appointmentPatient"],
-    queryFn: () => apiAppointmentPatient({ id: Number(id) }),
-=======
 import { IAppointmentRes, apiAppointmentPatient, apiAppointmentDoctor } from "@core";
 export function AppointmentPage() {
   const { id, role, name } = useStorageToken();
@@ -22,16 +13,11 @@ export function AppointmentPage() {
   }) : useQuery<IAppointmentRes[]>({
     queryKey: ["appointmentDoctor"],
     queryFn: () => apiAppointmentDoctor({ id: Number(id) }),
->>>>>>> Stashed changes
   });
 
   return (
     <Card>
-<<<<<<< Updated upstream
-      <Title level={2}>Danh sách lịch hẹn của bệnh nhân</Title>
-=======
       <Title level={2}> Danh sách lịch hẹn của {role === "Doctor" ? "bác sĩ" : "bạn"}</Title>
->>>>>>> Stashed changes
       <List
         itemLayout="horizontal"
         dataSource={data}
