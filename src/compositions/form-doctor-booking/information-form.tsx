@@ -5,17 +5,47 @@ const config = {
   ],
 };
 import { EMPTY_INPUT_ERROR, FORMAT_DATE_DEFAULT } from "@constant";
-import { EDirectionType } from "@core";
-import { useDayBooking } from "@store";
+import { EDirectionType, apiAppointmentByDate, getRange } from "@core";
+import { useBooking, useStorageToken } from "@store";
+import { useQuery } from "@tanstack/react-query";
 import { DatePicker, Form, TimePicker } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
+
 export function InformationDoctorBooking() {
-  const dayBooking = useDayBooking((state: any) => state?.dayBooking);
-  console.log(
-    "🚀 ~ file: index.tsx:10 ~ FormContent ~ dayBooking:",
-    dayBooking
-  );
+  const dayBooking = useBooking((state: any) => state?.dayBooking);
+  const { id: patientId } = useStorageToken();
+  const doctorId = useBooking((state: any) => state?.doctorId);
+
+  const { data } = useQuery({
+    queryKey: ["dateBooking"],
+    queryFn: () =>
+      apiAppointmentByDate({
+        id: Number(doctorId),
+        date: dayBooking,
+      }),
+    select(data) {
+      return {
+        hour: data
+          ?.map((item: any) => {
+            return getRange(
+              new Date(item?.dateBooking).getHours(),
+              new Date(item?.dateEnd).getHours()
+            );
+          })
+          .flat(),
+        minute: data
+          ?.map((item: any) => {
+            return getRange(
+              new Date(item?.dateBooking).getMinutes(),
+              new Date(item?.dateEnd).getMinutes()
+            );
+          })
+          .flat(),
+      };
+    },
+  });
+
   return (
     <Space
       size={SizeProps.Middle}
@@ -29,7 +59,7 @@ export function InformationDoctorBooking() {
             message: EMPTY_INPUT_ERROR,
           },
         ]}
-        name="name"
+        name="fullName"
         label="Họ tên"
       >
         <InputText placeholder="Nhập họ và tên" />
@@ -41,10 +71,10 @@ export function InformationDoctorBooking() {
             message: EMPTY_INPUT_ERROR,
           },
         ]}
-        name="sex"
+        name="gender"
         label="Giới tính"
       >
-        <RadioGroup name="sex">
+        <RadioGroup name="gender">
           <Radio value="Nam">Nam</Radio>
           <Radio value="Nữ">Nữ</Radio>
         </RadioGroup>
@@ -80,10 +110,15 @@ export function InformationDoctorBooking() {
             message: EMPTY_INPUT_ERROR,
           },
         ]}
-        name="time-picker"
+        name="timePicker"
         label="Giờ"
       >
-        <TimePicker format="HH:mm" />
+        <TimePicker
+          format="HH:mm"
+          disabledTime={() => ({
+            disabledHours: () => data?.hour,
+          })}
+        />
       </Form.Item>
       <Form.Item
         rules={[
@@ -92,14 +127,14 @@ export function InformationDoctorBooking() {
             message: EMPTY_INPUT_ERROR,
           },
         ]}
-        name="day"
+        name="dateBooking"
         label="Ngày đặt"
         initialValue={dayjs(dayBooking)}
       >
         <DatePicker format={FORMAT_DATE_DEFAULT} />
       </Form.Item>
-      <Form.Item name="textArea" label="Mô tả triệu chứng">
-        <TextArea name="textArea">
+      <Form.Item name="description" label="Mô tả triệu chứng">
+        <TextArea name="description">
           <TextArea rows={4} />
         </TextArea>
       </Form.Item>

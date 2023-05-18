@@ -16,6 +16,7 @@ import {
   EButtonTypes,
   EDirectionFlex,
   IDoctorDetailRes,
+  apiAppointmentByDate,
   apiDoctorDetail,
   routerPathFull,
 } from "@core";
@@ -24,9 +25,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "antd/es/form/Form";
 import dayjs, { Dayjs } from "dayjs";
-import { useDayBooking } from "@store";
+import { useBooking } from "@store";
 export function DetailPage() {
   let { idDoctor } = useParams();
+  const setDoctorId = useBooking((state: any) => state.setDoctorId);
   const { data } = useQuery<IDoctorDetailRes>({
     refetchOnWindowFocus: false,
     queryKey: ["detailDoctor"],
@@ -41,7 +43,7 @@ export function DetailPage() {
   const navigate = useNavigate();
 
   const [form] = useForm();
-  const setDayBooking = useDayBooking((state: any) => state?.setDayBooking);
+  const setDayBooking = useBooking((state: any) => state?.setDayBooking);
 
   const onFinish = (values: any) => {
     console.log(
@@ -49,6 +51,7 @@ export function DetailPage() {
       dayjs(values.calendar).toDate()
     );
     setDayBooking(dayjs(values.calendar).toDate());
+    setDoctorId(idDoctor || "");
     navigate(routerPathFull.booking.root);
   };
 
