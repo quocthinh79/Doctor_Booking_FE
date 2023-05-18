@@ -13,6 +13,9 @@ const Cart = lazy(() => import("../pages/cart"));
 const DetailPage = lazy(() => import("../pages/detail"));
 const PaymentPage = lazy(() => import("../pages/payment"));
 const SearchPage = lazy(() => import("../pages/search"));
+const BookingPage = lazy(() => import("../pages/booking"));
+const AppointmentPage = lazy(() => import("../pages/appointment"));
+const AppointmentDetail = lazy(() => import("../pages/appointment-detail"));
 
 const router = [
   {
@@ -76,6 +79,30 @@ const router = [
         element: (
           <Suspense fallback={<>Loading</>}>
             <SearchPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: routerPathFull.booking.root,
+        element: (
+          <Suspense fallback={<>Loading</>}>
+            <BookingPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: routerPathFull.appointment.root,
+        element: (
+          <Suspense fallback={<>Loading</>}>
+            <AppointmentPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: routerPathFull.appointment.detail,
+        element: (
+          <Suspense fallback={<>Loading</>}>
+            <AppointmentDetail />
           </Suspense>
         ),
       },

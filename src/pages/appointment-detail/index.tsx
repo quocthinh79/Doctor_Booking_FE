@@ -1,5 +1,6 @@
 import { apiAppointmentDoctorDetail } from "@api";
 import { Title } from "@components";
+
 import { EButtonTypes, IAppointmentDetailRes, routerPathFull } from "@core";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Card, Form, Input, InputNumber, Radio } from "antd";
@@ -61,7 +62,6 @@ export function AppointmentDetail() {
       <Link to={routerPathFull.appointment.root}>
         <Button type={EButtonTypes.Primary}>Trở lại</Button>
       </Link>
-
     </Card>
   );
 }

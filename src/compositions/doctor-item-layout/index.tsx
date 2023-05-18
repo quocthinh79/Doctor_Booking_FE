@@ -25,7 +25,7 @@ export function DoctorItemLayout() {
   // )
   // );
 
-  const { data, refetch } = useQuery<IDoctorListRes[]>({
+  const { data, refetch, dataUpdatedAt } = useQuery<IDoctorListRes[]>({
     refetchOnWindowFocus: false,
     queryKey: ["doctorList"],
     queryFn: () =>
@@ -42,11 +42,11 @@ export function DoctorItemLayout() {
 
   return (
     <Row gutter={[SPACE_BETWEEN_ITEMS, SPACE_BETWEEN_ITEMS]}>
-      {data?.map(({ fullName, phone }, index) => (
+      {data?.map(({ fullName, phone, id }, index) => (
         <Col key={`${fullName}${index}`} span={8}>
           <DoctorCardItem
             key={index}
-            id={index}
+            id={id}
             phoneNumber={phone}
             doctorName={fullName}
             linkAvatar={
@@ -55,7 +55,7 @@ export function DoctorItemLayout() {
           />
         </Col>
       ))}
-      <Col span={SPACE_BETWEEN_ITEMS}>
+      {/* <Col span={SPACE_BETWEEN_ITEMS}>
         <Pagination
           current={1}
           defaultCurrent={1}
@@ -63,7 +63,7 @@ export function DoctorItemLayout() {
           total={10}
           // onChange={handleChange}
         />
-      </Col>
+      </Col> */}
     </Row>
   );
 }

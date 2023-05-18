@@ -1,43 +1,37 @@
-<<<<<<< Updated upstream
 import { ContainerFixed } from "@components";
 import { EBreakpoint, templateStringToClassName } from "@core";
-=======
-import { ContainerFixed, Menu } from "@components";
-import { EBreakpoint, EFlexAlign, EInputTextSize, EJustifyFlex, templateStringToClassName, routerPathFull, EButtonTypes, EModeMenu } from "@core";
->>>>>>> Stashed changes
+import { EBreakpoint, EFlexAlign, EInputTextSize, EJustifyFlex, templateStringToClassName, routerPathFull, EButtonTypes } from "@core";
 import { Header } from "antd/es/layout/layout";
+import {
+  Button,
+  Flex,
+  Form,
+  FormItem,
+  Image,
+  InputSearch,
+} from "@components";
 import { memo } from "react";
-<<<<<<< Updated upstream
-
-export function MainHeader() {
-=======
 import { useForm } from "antd/es/form/Form";
 import { SPACE_BETWEEN_ITEMS } from "@constant";
 import { cx } from "@emotion/css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import { useStorageToken } from "@store";
 const logo = require("../../../images/logo.png");
 
 export function MainHeader() {
   const [form] = useForm();
   const navigator = useNavigate();
+
   const onFinish = (values: any) => {
     return values.keyWord
       ? navigator(`${routerPathFull.search.root}?keyWord=${values.keyWord}`)
       : navigator("/");
   };
->>>>>>> Stashed changes
   return (
-    <Header>
+    <Header style={{ backgroundColor: 'white' }}>
       <ContainerFixed
         className={templateStringToClassName()`height: 100%; display: flex;`}
         breakpoint={EBreakpoint.XL}
-<<<<<<< Updated upstream
-        position="center"
-      >
-        This is header
-=======
         position="center">
         <Link to={routerPathFull.home.root}>
           <Image width="auto" height="100%" src={logo} preview={false} />
@@ -67,11 +61,9 @@ export function MainHeader() {
               </Link>
               <LogoutOutlined style={{ margin: "10px" }} />
             </div>
-          
           </Flex>
-
         </Flex>
->>>>>>> Stashed changes
+
       </ContainerFixed>
     </Header>
   );
