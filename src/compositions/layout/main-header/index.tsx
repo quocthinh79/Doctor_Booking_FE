@@ -15,9 +15,11 @@ import { SPACE_BETWEEN_ITEMS } from "@constant";
 import { cx } from "@emotion/css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { useStorageToken } from "@store";
 const logo = require("../../../images/logo.png");
 
 export function MainHeader() {
+  const { id,role,name } = useStorageToken();
   const [form] = useForm();
   const navigator = useNavigate();
 
@@ -52,13 +54,18 @@ export function MainHeader() {
               </FormItem>
             </Form>
             <div style={{ fontSize: "28px", margin: "auto", marginRight: "5px" }} >
-              <Link to={routerPathFull.appointment.root}>
-                <Button type={EButtonTypes.Text}>Danh sách lịch hẹn</Button>
-              </Link>
+              {id !== "" ? (<Link to={routerPathFull.appointment.root}>
+                <Button type={EButtonTypes.Text}>Xin chào {name}, Danh sách lịch hẹn {role ==="Doctor" ? "của bác sĩ":"của bạn"}</Button>
+              </Link>):(<Link to={routerPathFull.auth.login}>
+                <Button type={EButtonTypes.Text}>Xin chào {name}, Danh sách lịch hẹn {role ==="Doctor" ? "của bác sĩ":"của bạn"}</Button>
+              </Link>)}
+              
               <Link to={routerPathFull.auth.login}>
                 <UserOutlined style={{ margin: "10px" }} />
               </Link>
+              
               <LogoutOutlined style={{ margin: "10px" }} />
+            
             </div>
           </Flex>
         </Flex>
