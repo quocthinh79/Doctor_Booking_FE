@@ -19,9 +19,10 @@ import { useStorageToken } from "@store";
 const logo = require("../../../images/logo.png");
 
 export function MainHeader() {
-  const { id,role,name } = useStorageToken();
+  const { id, role, name } = useStorageToken();
   const [form] = useForm();
   const navigator = useNavigate();
+  const { setId } = useStorageToken();
 
   const onFinish = (values: any) => {
     return values.keyWord
@@ -55,17 +56,14 @@ export function MainHeader() {
             </Form>
             <div style={{ fontSize: "28px", margin: "auto", marginRight: "5px" }} >
               {id !== "" ? (<Link to={routerPathFull.appointment.root}>
-                <Button type={EButtonTypes.Text}>Xin chào {name}, Danh sách lịch hẹn {role ==="Doctor" ? "của bác sĩ":"của bạn"}</Button>
-              </Link>):(<Link to={routerPathFull.auth.login}>
-                <Button type={EButtonTypes.Text}>Xin chào {name}, Danh sách lịch hẹn {role ==="Doctor" ? "của bác sĩ":"của bạn"}</Button>
+                <Button type={EButtonTypes.Text}>Xin chào {name}, Danh sách lịch hẹn {role === "Doctor" ? "của bác sĩ" : "của bạn"}</Button>
+              </Link>) : (<Link to={routerPathFull.auth.login}>
+                <Button type={EButtonTypes.Primary}>Đăng nhập</Button>
               </Link>)}
-              
-              <Link to={routerPathFull.auth.login}>
-                <UserOutlined style={{ margin: "10px" }} />
-              </Link>
-              
-              <LogoutOutlined style={{ margin: "10px" }} />
-            
+
+              {id != "" ? (
+                <Button type={EButtonTypes.Primary} onClick={() => {localStorage.clear(), setId(""), navigator("/") }}>Thoát</Button>
+              ) : ""}
             </div>
           </Flex>
         </Flex>
