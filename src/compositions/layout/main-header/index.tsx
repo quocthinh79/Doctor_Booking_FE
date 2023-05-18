@@ -1,5 +1,4 @@
 import { ContainerFixed } from "@components";
-import { EBreakpoint, templateStringToClassName } from "@core";
 import { EBreakpoint, EFlexAlign, EInputTextSize, EJustifyFlex, templateStringToClassName, routerPathFull, EButtonTypes } from "@core";
 import { Header } from "antd/es/layout/layout";
 import {
