@@ -1,9 +1,10 @@
 import { apiAppointmentDoctorDetail } from "@api";
 import { Title } from "@components";
-import { IAppointmentDetailRes } from "@core";
+
+import { EButtonTypes, IAppointmentDetailRes, routerPathFull } from "@core";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Card, Form, Input, InputNumber, Radio } from "antd";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export function AppointmentDetail() {
   let { idAppointment } = useParams();
@@ -23,7 +24,7 @@ export function AppointmentDetail() {
 
   return (
     <Card style={{ width: "800px", textAlign: "center", margin: "auto" }}>
-      <Title level={2}>Chi tiết lịch hẹn của bác sĩ</Title>
+      <Title level={2}>Chi tiết lịch hẹn</Title>
       <Form {...layout} name="nest-messages" style={{ maxWidth: 600 }}>
         <Form.Item
           name={["user", "name"]}
@@ -58,6 +59,9 @@ export function AppointmentDetail() {
           {data?.description}
         </Form.Item>
       </Form>
+      <Link to={routerPathFull.appointment.root}>
+        <Button type={EButtonTypes.Primary}>Trở lại</Button>
+      </Link>
     </Card>
   );
 }

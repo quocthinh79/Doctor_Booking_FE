@@ -3,18 +3,18 @@ import { useStorageToken } from "@store";
 import { useQuery } from "@tanstack/react-query";
 import { Avatar, List } from "antd";
 import { Link } from "react-router-dom";
-import { IAppointmentRes, apiAppointmentDoctor } from "@core";
+import { IAppointmentRes, apiAppointmentPatient } from "@core";
 export function AppointmentPage() {
   const { id } = useStorageToken();
 
   const { data } = useQuery<IAppointmentRes[]>({
-    queryKey: ["appointmentDoctor"],
-    queryFn: () => apiAppointmentDoctor({ id: Number(id) }),
+    queryKey: ["appointmentPatient"],
+    queryFn: () => apiAppointmentPatient({ id: Number(id) }),
   });
 
   return (
     <Card>
-      <Title level={2}>Danh sách lịch hẹn của bác sĩ</Title>
+      <Title level={2}>Danh sách lịch hẹn của bệnh nhân</Title>
       <List
         itemLayout="horizontal"
         dataSource={data}

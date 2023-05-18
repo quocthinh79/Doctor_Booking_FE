@@ -1,5 +1,6 @@
 import { ContainerFixed } from "@components";
-import { EBreakpoint, EFlexAlign, EInputTextSize, EJustifyFlex, templateStringToClassName, routerPathFull } from "@core";
+import { EBreakpoint, templateStringToClassName } from "@core";
+import { EBreakpoint, EFlexAlign, EInputTextSize, EJustifyFlex, templateStringToClassName, routerPathFull, EButtonTypes } from "@core";
 import { Header } from "antd/es/layout/layout";
 import {
   Button,
@@ -52,13 +53,17 @@ export function MainHeader() {
               </FormItem>
             </Form>
             <div style={{ fontSize: "28px", margin: "auto", marginRight: "5px" }} >
-              <UserOutlined style={{ margin: "10px" }} />
+              <Link to={routerPathFull.appointment.root}>
+                <Button type={EButtonTypes.Text}>Danh sách lịch hẹn</Button>
+              </Link>
+              <Link to={routerPathFull.auth.login}>
+                <UserOutlined style={{ margin: "10px" }} />
+              </Link>
               <LogoutOutlined style={{ margin: "10px" }} />
             </div>
-
           </Flex>
-
         </Flex>
+
       </ContainerFixed>
     </Header>
   );
