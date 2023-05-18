@@ -55,7 +55,7 @@ export function DoctorItemLayout() {
           />
         </Col>
       ))}
-      <Col span={SPACE_BETWEEN_ITEMS}>
+      {/* <Col span={SPACE_BETWEEN_ITEMS}>
         <Pagination
           current={1}
           defaultCurrent={1}
@@ -63,7 +63,7 @@ export function DoctorItemLayout() {
           total={10}
           // onChange={handleChange}
         />
-      </Col>
+      </Col> */}
     </Row>
   );
 }
