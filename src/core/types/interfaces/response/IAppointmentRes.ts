@@ -10,4 +10,6 @@ export interface IAppointmentRes {
   doctor_id: number;
   patient_id: number;
   description: string;
+  timeBooking: string;
+  timeEnd: string;
 }

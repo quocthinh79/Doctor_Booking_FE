@@ -28,20 +28,17 @@ export function InformationDoctorBooking() {
       return {
         hour: data
           ?.map((item: any) => {
-            return getRange(
-              new Date(item?.dateBooking).getHours(),
-              new Date(item?.dateEnd).getHours()
-            );
+            return getRange(item?.timeBooking, item?.timeEnd);
           })
           .flat(),
-        minute: data
-          ?.map((item: any) => {
-            return getRange(
-              new Date(item?.dateBooking).getMinutes(),
-              new Date(item?.dateEnd).getMinutes()
-            );
-          })
-          .flat(),
+        // minute: data
+        //   ?.map((item: any) => {
+        //     return getRange(
+        //       new Date(item?.dateBooking).getMinutes(),
+        //       new Date(item?.dateEnd).getMinutes()
+        //     );
+        //   })
+        //   .flat(),
       };
     },
   });
@@ -110,7 +107,7 @@ export function InformationDoctorBooking() {
             message: EMPTY_INPUT_ERROR,
           },
         ]}
-        name="timePicker"
+        name="timeBooking"
         label="Giờ"
       >
         <TimePicker

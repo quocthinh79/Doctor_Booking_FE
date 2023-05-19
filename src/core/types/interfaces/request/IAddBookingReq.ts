@@ -7,4 +7,5 @@ export interface IAddBookingReq {
   email: string;
   dateBooking: string;
   description: string;
+  timeBooking: string;
 }
