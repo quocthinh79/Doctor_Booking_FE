@@ -22,15 +22,21 @@ export function FormContent() {
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
-  const onFinish = async ({ timePicker, dateBooking, ...restData }: any) => {
+  const onFinish = async ({
+    timePicker,
+    dateBooking,
+    timeBooking,
+    ...restData
+  }: any) => {
     try {
       //   schemaInformationAccount.parse(values);
+      console.log(dayjs(timeBooking).hour());
       await addBooking({
         ...restData,
         doctorId,
         patientId,
         dateBooking: dayjs(dateBooking).toDate(),
-        timePicker: dayjs(timePicker).toDate(),
+        timeBooking: dayjs(timeBooking).hour(),
       });
       setTimeout(() => {
         navigate(routerPathFull.home.root + "/");

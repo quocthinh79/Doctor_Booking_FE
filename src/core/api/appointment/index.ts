@@ -40,6 +40,7 @@ export const apiAddBooking = ({
   gender,
   patientId,
   phone,
+  timeBooking,
 }: IAddBookingReq) => {
   const passProps = {
     dateBooking,
@@ -50,6 +51,7 @@ export const apiAddBooking = ({
     gender,
     patientId,
     phone,
+    timeBooking,
   };
 
   return instanceAxios
