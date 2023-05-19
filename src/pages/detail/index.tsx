@@ -25,7 +25,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "antd/es/form/Form";
 import dayjs, { Dayjs } from "dayjs";
-import { useBooking } from "@store";
+import { useBooking, useStorageToken } from "@store";
 export function DetailPage() {
   let { idDoctor } = useParams();
   const setDoctorId = useBooking((state: any) => state.setDoctorId);
@@ -41,6 +41,7 @@ export function DetailPage() {
   const { degree, email, phone, specialize, user_name } = data || {};
 
   const navigate = useNavigate();
+  const { token } = useStorageToken();
 
   const [form] = useForm();
   const setDayBooking = useBooking((state: any) => state?.setDayBooking);
@@ -97,13 +98,19 @@ export function DetailPage() {
           <Divider />
           <Space widthFull>
             <Row gutter={[SPACE_BETWEEN_ITEMS, SPACE_BETWEEN_ITEMS]}>
-              <Button
+              {token != "" ? (<Button
                 block
                 type={EButtonTypes.Primary}
                 onClick={() => form.submit()}
               >
                 Đặt lịch ngay
-              </Button>
+              </Button>) : (<Button
+                block
+                type={EButtonTypes.Primary}
+                onClick={()=> navigate("/auth/login")}
+              >
+                Đặt lịch ngay
+              </Button>)}
             </Row>
           </Space>
         </Card>
